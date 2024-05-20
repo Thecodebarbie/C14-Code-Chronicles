@@ -21,8 +21,27 @@ router.post('/', withAuth, async (req, res) => {
         user_id: req.session.user_id,
       });
   
+      // Fetch the username of the comment creator
+    const commentCreator = await User.findByPk(req.session.user_id);
+    newComment.username = commentCreator.username;
+
+    // Add the current date to the comment
+    newComment.created_at = new Date();
+
+   // Update the post to include the new comment
+   const postId = req.body.post_id;
+   await Post.update(
+     { 
+       comments: sequelize.fn('array_append', sequelize.col('comments'), newComment.id), 
+       comment_authors: sequelize.fn('array_append', sequelize.col('comment_authors'), username),
+       comment_dates: sequelize.fn('array_append', sequelize.col('comment_dates'), currentDate)
+     },
+     { where: { id: postId } }
+   );
+
       res.status(200).json(newComment);
     } catch (err) {
+      console.error('Error creating comment:', err);
       res.status(400).json(err);
     }
   });
