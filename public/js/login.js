@@ -6,6 +6,7 @@ const loginFormHandler = async (event) => {
   const password = document.querySelector('#password-login').value.trim();
 
   if (username && password) {
+    try {
     // Send a POST request to the API endpoint
     const response = await fetch('/api/users/login', {
       method: 'POST',
@@ -17,9 +18,16 @@ const loginFormHandler = async (event) => {
       // If successful, redirect the browser to the profile page
       document.location.replace('/profile');
     } else {
-      alert(response.statusText);
+      const errorData = await response.json();
+      alert(errorData.message || 'Failed to sign up.');
     }
+  } catch (error) {
+    console.error('Error during signup:', error);
+    alert('An error occurred. Please try again.');
   }
+} else {
+  alert('Please enter both a username and password.');
+}
 };
 
 const signupFormHandler = async (event) => {
