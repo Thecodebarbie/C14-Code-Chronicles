@@ -19,3 +19,13 @@ const deleteComment = async (commentId) => {
       console.error('Error deleting comment:', error);
     }
   };
+
+  // Event listener to handle click on delete comment button
+document.addEventListener('click', async (event) => {
+    if (event.target.classList.contains('delete-comment-btn')) {
+      const commentId = event.target.getAttribute('data-comment-id');
+      if (commentId) {
+        await deleteComment(commentId);
+      }
+    }
+  });
