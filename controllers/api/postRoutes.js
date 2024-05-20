@@ -30,5 +30,16 @@ router.post('/post/:id/comment', async (req, res) => {
     }
   });
   
+  // Fetch comments for a specific post
+router.get('/:id/comments', async (req, res) => {
+    try {
+      const postId = req.params.id;
+      const comments = await Comment.findAll({ where: { post_id: postId } });
+      res.json(comments);
+    } catch (error) {
+      console.error('Error fetching comments:', error);
+      res.status(500).json({ error: 'Failed to fetch comments' });
+    }
+  });
 
 module.exports = router;
