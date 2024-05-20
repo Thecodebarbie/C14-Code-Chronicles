@@ -2,7 +2,12 @@
   <h2>{{title}}</h2>
  
   <p>{{contents}}</p>
-  <p>Created by {{user.username}} on {{format_date date_created}}</p>
+  <p>Created by {{user.username}} on {{format_date createdAt}}</p>
   
-   
+</div>
+<div class="comment-form">
+  <form id="comment-form">
+    <textarea id="comment-content" placeholder="Leave a comment..."></textarea>
+    <button type="submit">Submit</button>
+  </form>
 </div>
