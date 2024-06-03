@@ -1,3 +1,82 @@
+/* General Reset for Padding and Margin */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styling for site title */
+.site-title {
+  display: flex;
+  align-items: center;
+  font-size: 28px; /* Adjust the font size as needed */
+  margin-right: 25px;
+}
+
+/* Styling for Navigation Bar */
+.nav-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-right: 85px;
+}
+.nav-bar a, .nav-bar button {
+  margin-left: 45px; /* Adjust the spacing between nav items if needed */
+  text-decoration: none;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-bar button.no-button {
+  margin-left: 15px;
+}
+
+
+
+.nav-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list li {
+  margin: 0 1rem; /* Adjust margin as needed */
+}
+.nav-bar a:first-child {
+  margin-left: 15;
+  
+}
+.nav-list a,
+.nav-list .no-button {
+  text-decoration: none;
+  color: #000; /* Change this to your desired text color */
+}
+
+.nav-list .no-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-list a:hover,
+.nav-list .no-button:hover {
+  text-decoration: underline;
+}
+
+.site-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block; /* Ensures link behaves as inline block */
+}
+
+
+
 header, .project:not(:last-child) {
   border-bottom: 1px solid #ccc;
 }

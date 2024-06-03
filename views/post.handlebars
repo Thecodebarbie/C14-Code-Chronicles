@@ -16,10 +16,12 @@
   <h3>Comments:</h3>
   {{#each comments}}
     <div class="comment">
-      <p>{{this.content}}</p>
+      <p>{{this.comment}}</p>
       <p>Comment by {{this.user.username}} on {{format_date this.createdAt}}</p>
       <!-- Include a button to delete the comment -->
       <button class="delete-comment-btn" data-comment-id="{{this.id}}">Delete</button>
     </div>
   {{/each}}
 </div>
+
+<script src="/js/comments.js"></script>

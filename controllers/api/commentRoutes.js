@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Comment } = require('../../models');
+const { Comment, User, Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // Example route to fetch comments for a post
@@ -22,22 +22,22 @@ router.post('/', withAuth, async (req, res) => {
       });
   
       // Fetch the username of the comment creator
-    const commentCreator = await User.findByPk(req.session.user_id);
-    newComment.username = commentCreator.username;
+    // const commentCreator = await User.findByPk(req.session.user_id);
+    // newComment.username = commentCreator.username;
 
     // Add the current date to the comment
     newComment.created_at = new Date();
 
    // Update the post to include the new comment
-   const postId = req.body.post_id;
-   await Post.update(
-     { 
-       comments: sequelize.fn('array_append', sequelize.col('comments'), newComment.id), 
-       comment_authors: sequelize.fn('array_append', sequelize.col('comment_authors'), username),
-       comment_dates: sequelize.fn('array_append', sequelize.col('comment_dates'), currentDate)
-     },
-     { where: { id: postId } }
-   );
+  //  const postId = req.body.post_id;
+  //  await Post.update(
+  //    { 
+  //      comments: sequelize.fn('array_append', sequelize.col('comments'), newComment.id), 
+  //      comment_authors: sequelize.fn('array_append', sequelize.col('comment_authors'), username),
+  //      comment_dates: sequelize.fn('array_append', sequelize.col('comment_dates'), currentDate)
+  //    },
+  //    { where: { id: postId } }
+  //  );
 
       res.status(200).json(newComment);
     } catch (err) {

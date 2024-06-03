@@ -1,3 +1,39 @@
+
+const commentFormHandler = async (event) => {
+  event.preventDefault(); // Prevent default form submission behavior
+  
+  // Collect values from the comment form
+  const comment = document.querySelector('#comment-content').value.trim();
+
+  const post_id = window.location.href.split("/")[4]
+  
+  if (comment) {
+    try {
+      // Send a POST request to the API endpoint
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        body: JSON.stringify({ comment, post_id }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        // If successful, refresh the page to display the new comment
+        location.reload();
+      } else {
+        // Handle response status other than 200 (OK)
+        console.error('Failed to submit comment');
+      }
+    } catch (error) {
+      // Handle fetch error
+      console.error('Error submitting comment:', error);
+    }
+  } else {
+    // Handle empty comment content
+    alert('Please enter a comment.');
+  }
+};
+
+
 const deleteComment = async (commentId) => {
     try {
       const response = await fetch(`/api/comments/${commentId}`, {
@@ -29,3 +65,5 @@ document.addEventListener('click', async (event) => {
       }
     }
   });
+
+  document.querySelector('#comment-form').addEventListener('submit', commentFormHandler)
